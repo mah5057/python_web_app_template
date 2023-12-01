@@ -2,18 +2,20 @@
 
 import typing
 
-import envparse
+import envparse  # type: ignore
 
 
 class Config:
     """Config class, to be instatiated with a schema document"""
 
-    def __init__(self, schema: typing.Dict):
+    def __init__(self, schema: typing.Dict):  # pylint: disable=redefined-outer-name
         self.schema = schema
         self.env = Config.get_coerced_env(self.schema)
 
     @staticmethod
-    def get_coerced_env(schema: typing.Dict) -> typing.Dict:
+    def get_coerced_env(
+        schema: typing.Dict,
+    ) -> typing.Dict:  # pylint: disable=redefined-outer-name
         """Given a schema document, parse with envparse, and construct
         an environment document and return it
         """
@@ -29,7 +31,8 @@ class Config:
         if env_var in self.env:
             return self.env[env_var]
         return None
-    
+
+
 # Config from environment variables
 schema = {
     "ENV": {
